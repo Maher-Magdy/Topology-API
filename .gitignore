@@ -30,3 +30,13 @@
 *.exe
 *.out
 *.app
+
+*.sln
+*.user
+*.filters
+*.vcxproj
+
+#folders
+Json parser library
+x64
+.vs
