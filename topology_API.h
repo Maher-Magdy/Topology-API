@@ -3,6 +3,7 @@
 #include <string>
 #include <fstream>
 #include<vector>
+#include <stdio.h>
 #include <iomanip>
 #include "json.hpp"
 using json = nlohmann::json;
@@ -26,7 +27,7 @@ public:
 class component : public topology
 {
 
-}; \
+}; 
 
 class memory_controls {
 private:
@@ -41,8 +42,8 @@ public:
     static void writeJSON(std::string TopologyID, std::string FileName);
     static std::vector<topology> queryTopologies();   
     static void deleteTopology(std::string TopologyID);
-    //static DeviceList queryDevices(std::string TopologyID);
-    //static DeviceList queryDevicesWithNetlistNode(std::string TopologyID, std::string NetlistNodeID);
+    static  std::vector<component> queryDevices(std::string TopologyID);
+    static  std::vector<component> queryDevicesWithNetlistNode(std::string TopologyID, std::string NetlistNodeID);
 
     //destructor
     ~memory_controls();
