@@ -1,8 +1,11 @@
 
-#include "topology class.h"
+#include "topology_API.h"
 using namespace std;
 
 int main()
 {
-	Topology::readJson("topology.json");
+	memory_controls::readJson("topology.json");
+	memory_controls::writeJSON("top1", "done.json");
+	
+
 }
