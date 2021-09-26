@@ -4,15 +4,10 @@
 #include <fstream>
 #include<vector>
 #include <iomanip>
-//#include <iomanip>
-//#include <cstdlib>
-//#include <sstream>
-//#include <memory>
 #include "json.hpp"
-
 using json = nlohmann::json;
 
-
+//
 class topology
 {
 private:
@@ -24,9 +19,14 @@ public:
     topology();
     //destructor
     ~topology();
-    void set_topology(json data);
-    json get_topology_data();
+    void set_data(json data);
+    json get_data();
 };
+//
+class component : public topology
+{
+
+}; \
 
 class memory_controls {
 private:
@@ -37,14 +37,13 @@ public:
     //constructor
     memory_controls();
     //static functions for memory managament
-    static void readJson(std::string FileName);
+    static topology readJson(std::string FileName);
     static void writeJSON(std::string TopologyID, std::string FileName);
-    //static TopologyList queryTopologies();
-    //static string deleteTopology(std::string TopologyID);
+    static std::vector<topology> queryTopologies();   
+    static void deleteTopology(std::string TopologyID);
     //static DeviceList queryDevices(std::string TopologyID);
     //static DeviceList queryDevicesWithNetlistNode(std::string TopologyID, std::string NetlistNodeID);
 
     //destructor
     ~memory_controls();
-
 };

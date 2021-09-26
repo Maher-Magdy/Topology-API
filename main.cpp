@@ -4,8 +4,11 @@ using namespace std;
 
 int main()
 {
-	memory_controls::readJson("topology.json");
+	//code for testing
+	memory_controls::readJson("topology.json");	
 	memory_controls::writeJSON("top1", "done.json");
-	
+	std::vector<topology> result=memory_controls::queryTopologies();	
+	memory_controls::deleteTopology("top1");
+
 
 }
