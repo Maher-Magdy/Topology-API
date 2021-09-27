@@ -158,16 +158,8 @@ memory_controls::~memory_controls(){}
 	 {
 		 
 		 //store the json in string
+		 result_string = found_json[i]["netlist"].dump();
 		 
-		 //write
-		 std::ofstream outfile("temp.txt");
-		 outfile << found_json[i]["netlist"] << std::endl;
-		 outfile.close();
-
-		 //read 	 
-		 std::ifstream infile("temp.txt");//open  file	
-		 infile >> result_string; //copy file to a variable
-		 infile.close(); //close file
 
 		 //search string
 		 size_t found = result_string.find(NetlistNodeID);
@@ -184,13 +176,8 @@ memory_controls::~memory_controls(){}
 	 }
 	
 
-	 //delete temp.txt file
-	 remove("temp.txt");
 	 if (no_component_found) { result_vector.push_back(result); }//in case of null
 	 return result_vector;
 
  }
-
- //json parsed_topology = json::parse(file_data);
-	//parsed_topology.value("id","");
 
