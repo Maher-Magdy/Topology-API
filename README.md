@@ -11,3 +11,5 @@ All explained in the code files.
 Installation :
 The API is written entirely in C++ utilizing two open source libraries : nlohmann json.hpp(for working with json files and format) and gtest.h (for code automated testing) .
  no further dependencies are required to use the API.
+
+the "Source code for API.h" folder contains the API library as you need to #include "topology_API.h"
