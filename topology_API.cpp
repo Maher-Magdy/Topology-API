@@ -22,7 +22,7 @@ memory_controls::memory_controls(){}
 //destructor
 memory_controls::~memory_controls(){}
 
-//static functions for memory managament
+
  topology memory_controls::readJson(std::string FileName)
 {
 	json parsed_topology;
@@ -33,34 +33,27 @@ memory_controls::~memory_controls(){}
 		std::ifstream infile(FileName);//open json file	
 		infile >> parsed_topology; //copy file to variable
 		infile.close(); //close file
-
 		
 		//set the result topology to json data
 		result.set_data(parsed_topology);
 
 		//insert the topology object to topology list
-		topology_list.push_back(result);
-		
+		topology_list.push_back(result);		
 	}
 	catch (const std::exception&)
-	{
-
-	}
+	{	}
 	
 	return result;
 }
 
 
  void memory_controls::writeJSON(std::string TopologyID, std::string FileName)
- {
-	
-	
+ {	
 	 json found_json;
 	 //search for the topology
 	 for (int i =0;i< topology_list.size();i++)
 	 {
-		 if(topology_list[i].get_data()["id"]==TopologyID)
-		 
+		 if(topology_list[i].get_data()["id"]==TopologyID)		 
 		 {
 			 found_json = topology_list[i].get_data();
 			 //write to a json file
@@ -68,10 +61,8 @@ memory_controls::~memory_controls(){}
 			 outfile << std::setw(4) << found_json << std::endl;
 			 outfile.close();
 			 return;
-		 }
-		
-	 }	 
-	
+		 }		
+	 }	 	
  }
 
  //returns a vector of object topology containing all the topologies in memory
@@ -81,15 +72,13 @@ memory_controls::~memory_controls(){}
 	 //search for the topology
 	 for (int i = 0; i < topology_list.size(); i++)
 	 {
-		 result.push_back(topology_list[i]);
-		 
+		 result.push_back(topology_list[i]);		 
 	 }
 	 return result;
  }
 
  void memory_controls::deleteTopology(std::string TopologyID)
- {
-	
+ {	
 	 int i = 0;
 	 for (auto it = topology_list.begin(); it != topology_list.end(); it++) 
 	 {
@@ -100,7 +89,6 @@ memory_controls::~memory_controls(){}
 		 }
 		 i++;
 	 }
-
  }
 
  //
@@ -118,8 +106,7 @@ memory_controls::~memory_controls(){}
 			 found_json = topology_list[i].get_data()["components"];			 
 			 no_component_found = 0;
 			 break;
-		 }
-		 
+		 }		 
 	 }
 	 //found
 	 int i = 0;
@@ -132,7 +119,6 @@ memory_controls::~memory_controls(){}
 	 
 	 if (no_component_found) { result_vector.push_back(result); }//in case of null
 	 return result_vector;
-
  }
  
  //
@@ -158,8 +144,7 @@ memory_controls::~memory_controls(){}
 	 {
 		 
 		 //store the json in string
-		 result_string = found_json[i]["netlist"].dump();
-		 
+		 result_string = found_json[i]["netlist"].dump();		 
 
 		 //search string
 		 size_t found = result_string.find(NetlistNodeID);
@@ -174,10 +159,7 @@ memory_controls::~memory_controls(){}
 		 //last increment i
 		 i++;
 	 }
-	
-
 	 if (no_component_found) { result_vector.push_back(result); }//in case of null
 	 return result_vector;
-
  }
 

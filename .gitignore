@@ -43,5 +43,5 @@ x64
 .vs
 Topology-API version
 gtest
-automated testing using gtest\.vs
+automated testing using gtest/.vs
 automated testing using gtest/Debug
