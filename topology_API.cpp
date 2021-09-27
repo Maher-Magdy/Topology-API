@@ -1,5 +1,6 @@
 #include "topology_API.h"
 
+//for class topology
 //constructor
 topology::topology() {}
 //destructor
@@ -13,10 +14,9 @@ json topology::get_data()
 	return this->topology_data;
 }
 
-
+//for class memory_controls
 //static members
 std::vector<topology>  memory_controls::topology_list;
-
 //constructor
 memory_controls::memory_controls(){}
 //destructor
