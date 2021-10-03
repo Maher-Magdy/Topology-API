@@ -13,29 +13,9 @@
 #include <stdio.h>
 #include <iomanip>
 #include "json.hpp"
-
+#include "topology.h"
+#include "component.h"
 using json = nlohmann::json;
-
-//
-class topology
-{
-private:
-    // the actual topology data
-    json topology_data;
-
-public:
-    //constructor
-    topology();
-    //destructor
-    ~topology();
-    void set_data(json data);
-    json get_data();
-};
-//
-class component : public topology
-{
-
-}; 
 
 class memory_controls {
 private:
@@ -50,7 +30,7 @@ public:
 
     //return a topology object conataining the read data from the json file and stores it in memory
     static topology readJson(std::string FileName);
-    //write a the topology data into a json file
+    //write the topology data into a json file
     static void writeJSON(std::string TopologyID, std::string FileName);
     //returns a vector of object topology containg all the topologies in memory
     static std::vector<topology> queryTopologies();  

@@ -1,26 +1,13 @@
-#include "topology_API.h"
+#include "memory  controls.h"
 
-//for class topology
-//constructor
-topology::topology() {}
-//destructor
-topology::~topology() {}
-void topology::set_data(json data)
-{
-	this->topology_data = data;
-}
-json topology::get_data()
-{
-	return this->topology_data;
-}
-
+#include "memory  controls.h"
 //for class memory_controls
 //static members
 std::vector<topology>  memory_controls::topology_list;
 //constructor
-memory_controls::memory_controls(){}
+memory_controls::memory_controls() {}
 //destructor
-memory_controls::~memory_controls(){}
+memory_controls::~memory_controls() {}
 
 
  topology memory_controls::readJson(std::string FileName)
@@ -49,20 +36,15 @@ memory_controls::~memory_controls(){}
 
  void memory_controls::writeJSON(std::string TopologyID, std::string FileName)
  {	
-	 json found_json;
-	 //search for the topology
-	 for (int i =0;i< topology_list.size();i++)
-	 {
-		 if(topology_list[i].get_data()["id"]==TopologyID)		 
-		 {
-			 found_json = topology_list[i].get_data();
+	 json found_json;	 
+	 found_json = topology::find(TopologyID, topology_list).get_data();
 			 //write to a json file
 			 std::ofstream outfile(FileName);
 			 outfile << std::setw(4) << found_json << std::endl;
 			 outfile.close();
 			 return;
-		 }		
-	 }	 	
+		 		
+	 		
  }
 
  //returns a vector of object topology containing all the topologies in memory
@@ -99,15 +81,16 @@ memory_controls::~memory_controls(){}
 	 std::vector<component> result_vector;
 	 bool no_component_found = 1;
 	 //search for the topology
-	 for (int i = 0; i < topology_list.size(); i++)
+	 try
 	 {
-		 if (topology_list[i].get_data()["id"] == TopologyID)
-		 {
-			 found_json = topology_list[i].get_data()["components"];			 
-			 no_component_found = 0;
-			 break;
-		 }		 
+		 found_json = topology::find(TopologyID, topology_list).get_data()["components"];
 	 }
+	 catch (const std::exception&)
+	 {
+		 no_component_found = 0;
+	 }	
+	 
+	 
 	 //found
 	 int i = 0;
 	 for (auto it = found_json.begin(); it != found_json.end(); it++)
@@ -129,13 +112,7 @@ memory_controls::~memory_controls(){}
 	 std::vector<component> result_vector;
 	 bool no_component_found = 1;
 	 //search for the topology
-	 for (int i = 0; i < topology_list.size(); i++)
-	 {
-		 if (topology_list[i].get_data()["id"] == TopologyID)
-		 {
-			 found_json = topology_list[i].get_data()["components"];			
-		 }		 		 
-	 }
+	 found_json=topology::find(TopologyID, topology_list).get_data()["components"];
 
 	 //search through all components with net list node ID
 	 std::string result_string;
